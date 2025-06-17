@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suntik Sosmed - Boost Your Social Media</title>
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff4d4d;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .price-lists {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .price-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .price-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .price-card h3 span {
+            margin-right: 0.5rem;
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem;
+            border-bottom: 1px dashed #eee;
+            margin: 0.3rem 0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .price-item:hover {
+            background-color: #f0f5ff;
+            transform: translateX(5px);
+        }
+        
+        .price-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-form {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: slideDown 0.5s ease;
+        }
+        
+        .modal h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .modal p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .close-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .note-section {
+            background: #fff8e1;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .note-section h3 {
+            color: #ff9800;
+            margin-bottom: 1rem;
+        }
+        
+        .note-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .note-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 0.3em;
+        }
+        
+        @media (max-width: 768px) {
+            .price-lists {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="emoji">💉</span> Suntik Sosmed Almair x SilverHold</h1>
+            <p class="subtitle">Jasa Suntik Ter Percaya Dan Amanah</p>
+        </header>
+        
+        <div class="price-lists">
+            <div class="price-card">
+                <h3><span class="emoji">🫧</span> SUNTIK FOLL TIKTOK</h3>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '100 FOLL : 7K', '100 FOLL', 'followers')">
+                    <span>100 FOLL</span>
+                    <span>7K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '200 FOLL : 12K', '200 FOLL', 'followers')">
+                    <span>200 FOLL</span>
+                    <span>12K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '300 FOLL : 17K', '300 FOLL', 'followers')">
+                    <span>300 FOLL</span>
+                    <span>17K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '400 FOLL : 22K', '400 FOLL', 'followers')">
+                    <span>400 FOLL</span>
+                    <span>22K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '500 FOLL : 27K', '500 FOLL', 'followers')">
+                    <span>500 FOLL</span>
+                    <span>27K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '600 FOLL : 32K', '600 FOLL', 'followers')">
+                    <span>600 FOLL</span>
+                    <span>32K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '700 FOLL : 37K', '700 FOLL', 'followers')">
+                    <span>700 FOLL</span>
+                    <span>37K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '1000 FOLL : 42K', '1000 FOLL', 'followers')">
+                    <span>1000 FOLL</span>
+                    <span>42K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '2000 FOLL : 82K', '2000 FOLL', 'followers')">
+                    <span>2000 FOLL</span>
+                    <span>82K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '3000 FOLL : 122K', '3000 FOLL', 'followers')">
+                    <span>3000 FOLL</span>
+                    <span>122K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '4000 FOLL : 162K', '4000 FOLL', 'followers')">
+                    <span>4000 FOLL</span>
+                    <span>162K</span>
+                </div>
+                <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '5000 FOLL : 202K', '5000 FOLL', 'followers')">
+                    <span>5000 FOLL</span>
+                    <span>202K</span>
+                </div>
+            </div>
+            
+            <div class="price-card">
+                <h3><span class="emoji">⚡</span> LIKE TIKTOK</h3>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '100 LIKE : 3K', '100 LIKE', 'likes')">
+                    <span>100 LIKE</span>
+                    <span>3K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '200 LIKE : 4K', '200 LIKE', 'likes')">
+                    <span>200 LIKE</span>
+                    <span>4K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '300 LIKE : 5K', '300 LIKE', 'likes')">
+                    <span>300 LIKE</span>
+                    <span>5K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '400 LIKE : 6K', '400 LIKE', 'likes')">
+                    <span>400 LIKE</span>
+                    <span>6K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '500 LIKE : 7K', '500 LIKE', 'likes')">
+                    <span>500 LIKE</span>
+                    <span>7K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '600 LIKE : 8K', '600 LIKE', 'likes')">
+                    <span>600 LIKE</span>
+                    <span>8K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '700 LIKE : 9K', '700 LIKE', 'likes')">
+                    <span>700 LIKE</span>
+                    <span>9K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '800 LIKE : 10K', '800 LIKE', 'likes')">
+                    <span>800 LIKE</span>
+                    <span>10K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '900 LIKE : 11K', '900 LIKE', 'likes')">
+                    <span>900 LIKE</span>
+                    <span>11K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '1K LIKE : 12K', '1K LIKE', 'likes')">
+                    <span>1K LIKE</span>
+                    <span>12K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '2K LIKE : 17K', '2K LIKE', 'likes')">
+                    <span>2K LIKE</span>
+                    <span>17K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '3K LIKE : 22K', '3K LIKE', 'likes')">
+                    <span>3K LIKE</span>
+                    <span>22K</span>
+                </div>
+                <div class="price-item" onclick="selectService('LIKE TIKTOK', '4K LIKE : 27K', '4K LIKE', 'likes')">
+                    <span>4K LIKE</span>
+                    <span>27K</span>
+                </div>
+            </div>
+            
+            <div class="price-card">
+                <h3><span class="emoji">🌏</span> Instagram Followers Mix</h3>
+                <div class="price-item" onclick="selectService('Instagram Followers Mix', '100 Followers : Rp 7.000', '100 Followers', 'followers')">
+                    <span>100 Followers</span>
+                    <span>Rp 7.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Followers Mix', '200 Followers : Rp 12.000', '200 Followers', 'followers')">
+                    <span>200 Followers</span>
+                    <span>Rp 12.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Followers Mix', '500 Followers : Rp 27.000', '500 Followers', 'followers')">
+                    <span>500 Followers</span>
+                    <span>Rp 27.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Followers Mix', '1.000 Followers : Rp 52.000', '1.000 Followers', 'followers')">
+                    <span>1.000 Followers</span>
+                    <span>Rp 52.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Followers Mix', '2.000 Followers : Rp 102.000', '2.000 Followers', 'followers')">
+                    <span>2.000 Followers</span>
+                    <span>Rp 102.000</span>
+                </div>
+            </div>
+            
+            <div class="price-card">
+                <h3><span class="emoji">🇮🇩</span> Instagram Followers Indonesia</h3>
+                <div class="price-item" onclick="selectService('Instagram Followers Indonesia', '100 Followers : Rp 9.300', '100 Followers', 'followers')">
+                    <span>100 Followers</span>
+                    <span>Rp 9.300</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Followers Indonesia', '200 Followers : Rp 16.600', '200 Followers', 'followers')">
+                    <span>200 Followers</span>
+                    <span>Rp 16.600</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Followers Indonesia', '500 Followers : Rp 38.500', '500 Followers', 'followers')">
+                    <span>500 Followers</span>
+                    <span>Rp 38.500</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Followers Indonesia', '1.000 Followers : Rp 75.000', '1.000 Followers', 'followers')">
+                    <span>1.000 Followers</span>
+                    <span>Rp 75.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Followers Indonesia', '2.000 Followers : Rp 148.000', '2.000 Followers', 'followers')">
+                    <span>2.000 Followers</span>
+                    <span>Rp 148.000</span>
+                </div>
+            </div>
+            
+            <div class="price-card">
+                <h3><span class="emoji">❤️</span> Instagram Like Mix</h3>
+                <div class="price-item" onclick="selectService('Instagram Like Mix', '100 Like : Rp 3.000', '100 Like', 'likes')">
+                    <span>100 Like</span>
+                    <span>Rp 3.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Like Mix', '200 Like : Rp 4.000', '200 Like', 'likes')">
+                    <span>200 Like</span>
+                    <span>Rp 4.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Like Mix', '500 Like : Rp 7.000', '500 Like', 'likes')">
+                    <span>500 Like</span>
+                    <span>Rp 7.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Like Mix', '1.000 Like : Rp 12.000', '1.000 Like', 'likes')">
+                    <span>1.000 Like</span>
+                    <span>Rp 12.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Like Mix', '2.000 Like : Rp 14.000', '2.000 Like', 'likes')">
+                    <span>2.000 Like</span>
+                    <span>Rp 14.000</span>
+                </div>
+            </div>
+            
+            <div class="price-card">
+                <h3><span class="emoji">❤️🇮🇩</span> Like Instagram Indonesia</h3>
+                <div class="price-item" onclick="selectService('Like Instagram Indonesia', '100 Like : Rp 5.000', '100 Like', 'likes')">
+                    <span>100 Like</span>
+                    <span>Rp 5.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Like Instagram Indonesia', '200 Like : Rp 14.000', '200 Like', 'likes')">
+                    <span>200 Like</span>
+                    <span>Rp 14.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Like Instagram Indonesia', '500 Like : Rp 17.000', '500 Like', 'likes')">
+                    <span>500 Like</span>
+                    <span>Rp 17.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Like Instagram Indonesia', '1.000 Like : Rp 32.000', '1.000 Like', 'likes')">
+                    <span>1.000 Like</span>
+                    <span>Rp 32.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Like Instagram Indonesia', '2.000 Like : Rp 62.000', '2.000 Like', 'likes')">
+                    <span>2.000 Like</span>
+                    <span>Rp 62.000</span>
+                </div>
+            </div>
+            
+            <div class="price-card">
+                <h3><span class="emoji">🎥</span> Instagram Reels Views</h3>
+                <div class="price-item" onclick="selectService('Instagram Reels Views', '1.000 View : Rp 3.000', '1.000 View', 'views')">
+                    <span>1.000 View</span>
+                    <span>Rp 3.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Reels Views', '2.000 View : Rp 4.000', '2.000 View', 'views')">
+                    <span>2.000 View</span>
+                    <span>Rp 4.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Reels Views', '5.000 View : Rp 7.000', '5.000 View', 'views')">
+                    <span>5.000 View</span>
+                    <span>Rp 7.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Reels Views', '10.000 View : Rp 12.000', '10.000 View', 'views')">
+                    <span>10.000 View</span>
+                    <span>Rp 12.000</span>
+                </div>
+                <div class="price-item" onclick="selectService('Instagram Reels Views', '20.000 View : Rp 22.000', '20.000 View', 'views')">
+                    <span>20.000 View</span>
+                    <span>Rp 22.000</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="order-form">
+            <h3 class="form-title">FORMAT ORDER SUNTIK SOSMED</h3>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="service">Suntik :</label>
+                    <input type="text" id="service" name="service" required>
+                </div>
+                <div class="form-group">
+                    <label for="nominal">Nominal order:</label>
+                    <input type="text" id="nominal" name="nominal" required>
+                </div>
+                <div class="form-group">
+                    <label for="followers">Followers :</label>
+                    <input type="text" id="followers" name="followers">
+                </div>
+                <div class="form-group">
+                    <label for="likes">Like :</label>
+                    <input type="text" id="likes" name="likes">
+                </div>
+                <div class="form-group">
+                    <label for="save">Save :</label>
+                    <input type="text" id="save" name="save">
+                </div>
+                <div class="form-group">
+                    <label for="views">Views :</label>
+                    <input type="text" id="views" name="views">
+                </div>
+                <div class="form-group">
+                    <label for="target">Target followers:</label>
+                    <input type="text" id="target" name="target" placeholder="@username atau link profil">
+                </div>
+                <div class="form-group">
+                    <label for="target_vt">Target VT:</label>
+                    <input type="text" id="target_vt" name="target_vt" placeholder="@username atau link VT">
+                </div>
+                <button type="submit" class="submit-btn">Pesan Sekarang</button>
+            </form>
+        </div>
+        
+        <div class="note-section">
+            <h3><span class="emoji">⚠️</span> NOTED</h3>
+            <ul>
+                <li>Kesalahan input link beresiko gagal (bukan kesalahan admin)</li>
+                <li>Pastikan username/link benar</li>
+                <li>Proses paling cepat 1 menit dan paling lambat 1 hari</li>
+                <li>Pastikan akun target tidak privat</li>
+                <li>Jangan ganti username ketika pesanan belum done</li>
+                <li>Followers proses 1 JAM - 1 HARI</li>
+                <li>Untuk pesanan LIKE/VIEWS wajib mengisi Target VT</li>
+                <li>Untuk pesanan FOLLOWERS wajib mengisi Target Followers</li>
+                <li>Untuk Pesanan Suntik Instagram Garansi 10 Hari</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h2>Pesanan Berhasil!</h2>
+            <p>Terima kasih telah memesan layanan kami. Pesanan Anda sedang diproses.</p>
+            <p>Silakan lanjutkan pembayaran dan konfirmasi via WhatsApp.</p>
+            <button class="close-btn" onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+    
+    <script>
+        // Nomor WhatsApp tujuan
+        const whatsappNumber = "6285167089251"; // Ganti dengan nomor WhatsApp Anda
+        
+        // Variabel untuk menyimpan jenis layanan yang dipilih
+        let selectedServiceType = '';
+        
+        function selectService(service, nominal, quantity, serviceType) {
+            document.getElementById('service').value = service;
+            document.getElementById('nominal').value = nominal;
+            selectedServiceType = serviceType;
+            
+            // Auto-fill fields based on service
+            if (serviceType === 'followers') {
+                document.getElementById('followers').value = quantity;
+                document.getElementById('likes').value = '';
+                document.getElementById('views').value = '';
+            } else if (serviceType === 'likes') {
+                document.getElementById('likes').value = quantity;
+                document.getElementById('followers').value = '';
+                document.getElementById('views').value = '';
+            } else if (serviceType === 'views') {
+                document.getElementById('views').value = quantity;
+                document.getElementById('followers').value = '';
+                document.getElementById('likes').value = '';
+            }
+            
+            // Scroll ke form
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const service = document.getElementById('service').value;
+            const nominal = document.getElementById('nominal').value;
+            const followers = document.getElementById('followers').value;
+            const likes = document.getElementById('likes').value;
+            const save = document.getElementById('save').value;
+            const views = document.getElementById('views').value;
+            const target = document.getElementById('target').value;
+            const target_vt = document.getElementById('target_vt').value;
+            
+            // Validasi berdasarkan jenis layanan
+            if (selectedServiceType === 'followers' && !target) {
+                alert('Untuk pesanan FOLLOWERS, harap masukkan Target Followers');
+                return;
+            }
+            
+            if ((selectedServiceType === 'likes' || selectedServiceType === 'views') && !target_vt) {
+                alert('Untuk pesanan LIKE/VIEWS, harap masukkan Target VT');
+                return;
+            }
+            
+            // Create WhatsApp message
+            let message = `FORMAT ORDER SUNTIK SOSMED%0A`;
+            message += `Suntik : ${service}%0A`;
+            message += `Nominal order: ${nominal}%0A`;
+            if (followers) message += `Followers : ${followers}%0A`;
+            if (likes) message += `Like : ${likes}%0A`;
+            if (save) message += `Save : ${save}%0A`;
+            if (views) message += `Views : ${views}%0A`;
+            if (target) message += `Target followers: ${target}%0A`;
+            if (target_vt) message += `Target VT: ${target_vt}`;
+            
+            // Open WhatsApp in new tab
+            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+            
+            // Show success modal
+            document.getElementById('successModal').style.display = 'flex';
+            
+            // Reset form
+            this.reset();
+            selectedServiceType = '';
+        });
+        
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('successModal')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
