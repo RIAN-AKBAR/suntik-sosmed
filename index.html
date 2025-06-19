@@ -518,6 +518,10 @@
                     <input type="text" id="save" name="save">
                 </div>
                 <div class="form-group">
+                    <label for="shares">Shares :</label>
+                    <input type="text" id="shares" name="shares">
+                </div>
+                <div class="form-group">
                     <label for="views">Views :</label>
                     <input type="text" id="views" name="views">
                 </div>
@@ -575,14 +579,17 @@
                 document.getElementById('followers').value = quantity;
                 document.getElementById('likes').value = '';
                 document.getElementById('views').value = '';
+                document.getElementById('shares').value = '';
             } else if (serviceType === 'likes') {
                 document.getElementById('likes').value = quantity;
                 document.getElementById('followers').value = '';
                 document.getElementById('views').value = '';
+                document.getElementById('shares').value = '';
             } else if (serviceType === 'views') {
                 document.getElementById('views').value = quantity;
                 document.getElementById('followers').value = '';
                 document.getElementById('likes').value = '';
+                document.getElementById('shares').value = '';
             }
             
             // Scroll ke form
@@ -598,6 +605,7 @@
             const followers = document.getElementById('followers').value;
             const likes = document.getElementById('likes').value;
             const save = document.getElementById('save').value;
+            const shares = document.getElementById('shares').value;
             const views = document.getElementById('views').value;
             const target = document.getElementById('target').value;
             const target_vt = document.getElementById('target_vt').value;
@@ -620,6 +628,7 @@
             if (followers) message += `Followers : ${followers}%0A`;
             if (likes) message += `Like : ${likes}%0A`;
             if (save) message += `Save : ${save}%0A`;
+            if (shares) message += `Shares : ${shares}%0A`;
             if (views) message += `Views : ${views}%0A`;
             if (target) message += `Target followers: ${target}%0A`;
             if (target_vt) message += `Target VT: ${target_vt}`;
