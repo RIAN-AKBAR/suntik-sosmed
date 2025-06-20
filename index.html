@@ -266,6 +266,62 @@
         
         <div class="price-lists">
             <div class="price-card">
+                <h3><span class="emoji">🎵</span> PAKET LENGKAP TIKTOK</h3>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK LENGKAP', 'Rp 4.500', '5k views', '200 likes', '50 shares', '50 saves')">
+                    <span>5k views + 200 likes + 50 shares + 50 saves</span>
+                    <span>Rp 4.500</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK LENGKAP', 'Rp 5.500', '8k views', '500 likes', '100 shares', '100 saves')">
+                    <span>8k views + 500 likes + 100 shares + 100 saves</span>
+                    <span>Rp 5.500</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK LENGKAP', 'Rp 6.500', '10k views', '700 likes', '100 shares', '100 saves')">
+                    <span>10k views + 700 likes + 100 shares + 100 saves</span>
+                    <span>Rp 6.500</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK LENGKAP', 'Rp 8.000', '10k views', '1k likes', '150 shares', '150 saves')">
+                    <span>10k views + 1k likes + 150 shares + 150 saves</span>
+                    <span>Rp 8.000</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK LENGKAP', 'Rp 10.000', '15k views', '1k likes', '200 shares', '200 saves')">
+                    <span>15k views + 1k likes + 200 shares + 200 saves</span>
+                    <span>Rp 10.000</span>
+                </div>
+            </div>
+
+            <div class="price-card">
+                <h3><span class="emoji">💰</span> PAKET HEMAT TIKTOK</h3>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK HEMAT', 'Rp 3.000', '4k views', '400 likes', '', '')">
+                    <span>4k views + 400 likes</span>
+                    <span>Rp 3.000</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK HEMAT', 'Rp 3.500', '10k views', '500 likes', '', '')">
+                    <span>10k views + 500 likes</span>
+                    <span>Rp 3.500</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK HEMAT', 'Rp 5.000', '15k views', '1k likes', '', '')">
+                    <span>15k views + 1k likes</span>
+                    <span>Rp 5.000</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK HEMAT', 'Rp 6.000', '15k views', '1.5k likes', '', '')">
+                    <span>15k views + 1.5k likes</span>
+                    <span>Rp 6.000</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK HEMAT', 'Rp 7.500', '20k views', '2k likes', '', '')">
+                    <span>20k views + 2k likes</span>
+                    <span>Rp 7.500</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK HEMAT', 'Rp 9.000', '30k views', '3k likes', '', '')">
+                    <span>30k views + 3k likes</span>
+                    <span>Rp 9.000</span>
+                </div>
+                <div class="price-item" onclick="fillTikTokForm('PAKET TIKTOK HEMAT', 'Rp 13.000', '50k views', '5k likes', '', '')">
+                    <span>50k views + 5k likes</span>
+                    <span>Rp 13.000</span>
+                </div>
+            </div>
+
+            <div class="price-card">
                 <h3><span class="emoji">🫧</span> SUNTIK FOLL TIKTOK</h3>
                 <div class="price-item" onclick="selectService('SUNTIK FOLL TIKTOK', '100 FOLL : 7K', '100 FOLL', 'followers')">
                     <span>100 FOLL</span>
@@ -569,27 +625,38 @@
         // Variabel untuk menyimpan jenis layanan yang dipilih
         let selectedServiceType = '';
         
+        function fillTikTokForm(service, nominal, views, likes, shares, saves) {
+            document.getElementById('service').value = service;
+            document.getElementById('nominal').value = nominal;
+            document.getElementById('views').value = views || '';
+            document.getElementById('likes').value = likes || '';
+            document.getElementById('shares').value = shares || '';
+            document.getElementById('save').value = saves || '';
+            document.getElementById('followers').value = '';
+            
+            selectedServiceType = 'views';
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+        }
+        
         function selectService(service, nominal, quantity, serviceType) {
             document.getElementById('service').value = service;
             document.getElementById('nominal').value = nominal;
             selectedServiceType = serviceType;
             
+            // Reset all fields first
+            document.getElementById('followers').value = '';
+            document.getElementById('likes').value = '';
+            document.getElementById('save').value = '';
+            document.getElementById('shares').value = '';
+            document.getElementById('views').value = '';
+            
             // Auto-fill fields based on service
             if (serviceType === 'followers') {
                 document.getElementById('followers').value = quantity;
-                document.getElementById('likes').value = '';
-                document.getElementById('views').value = '';
-                document.getElementById('shares').value = '';
             } else if (serviceType === 'likes') {
                 document.getElementById('likes').value = quantity;
-                document.getElementById('followers').value = '';
-                document.getElementById('views').value = '';
-                document.getElementById('shares').value = '';
             } else if (serviceType === 'views') {
                 document.getElementById('views').value = quantity;
-                document.getElementById('followers').value = '';
-                document.getElementById('likes').value = '';
-                document.getElementById('shares').value = '';
             }
             
             // Scroll ke form
